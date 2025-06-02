@@ -95,3 +95,7 @@ button:hover {
     border: 1px solid #FE575A;
     box-shadow: 0 0 8px #FE575A;
 }
+
+.hide {
+    display: none;
+}

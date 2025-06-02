@@ -50,10 +50,16 @@ let message
 
 const errorMessage = (errorType, place, input) => {
     input.classList.add("input__border--error");
-    message = document.createElement("p");
-    message.classList.toggle("input--error");
+    message = place.children[2];
+    message.classList.add("input--error");
     message.textContent = errorType;
-    place.append(message);
+}
+
+const validInput = (place, input) => {
+    input.classList.remove("input__border--error");
+    message = place.children[2];
+    message.classList.remove("input--error");
+    message.classList.add("hide");
 }
 
 // THE DIFFERENT SCENARI
@@ -63,26 +69,40 @@ form.addEventListener("submit", function() {
         errorMessage(nameError, nameContainer, surName);
     } else if (surName.value.length <= 0) {
         errorMessage(nameNone, nameContainer, surName);
+    } else {
+        validInput(nameContainer, surName);
     }
+
     if (firstName.value.length < 2 && firstName.value.length > 0) {
         errorMessage(firstNameError, firstNameContainer, firstName);
     } else if (firstName.value.length <= 0) {
         errorMessage(firstNameNone, firstNameContainer, firstName);
+    } else {
+        validInput(firstNameContainer, firstName);
     }
+
     if (!emailCheck.test(email.value)) {
         errorMessage(emailError, emailContainer, email);
     } else if (email.value.length <= 0) {
         errorMessage(emailNone, emailContainer, email);
+    } else {
+        validInput(emailContainer, email);
     }
+
     if (!passwordCheck.test(password.value)) {
         errorMessage(passwordError, passwordContainer, password);
     } else if (password.value.length <= 0) {
         errorMessage(passwordNone, passwordContainer, password);
+    } else {
+        validInput(passwordContainer, password);
     }
+
     if (isNaN(age.value) === true || age.value < 18 && age.value.length > 0 || age.value > 99) {
         errorMessage(ageError, ageContainer, age);
     } else if (age.value.length <= 0) {
         errorMessage(ageNone, ageContainer, age);
+    } else {
+        validInput(ageContainer, age);
     }
 })
 
