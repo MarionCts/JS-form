@@ -39,6 +39,7 @@ form {
     max-width: 380px;
     gap: 15px;
     color: #FFFFFF;
+    margin-bottom: 50px;
 }
 
 .form__container {
@@ -52,7 +53,7 @@ form {
     font-size: 14px;
 }
 
-.form__container input {
+input {
     border: 1px #FFFFFF solid;
     background-color: transparent;
     border-radius: 0 20px 0 0;
@@ -60,12 +61,13 @@ form {
     color: #FFFFFF;
 }
 
-button, .form__container input {
+button, input {
     height: 40px;
 }
 
 button {
-    margin: 20px 0 50px;
+    width: 100%;
+    margin: 20px 0;
     border: none;
     border-radius: 0 20px 0 20px;
     cursor: pointer;
@@ -86,4 +88,10 @@ button:hover {
 .input--error {
     color: #FE575A;
     font-style: italic;
+    font-size: 13px;
+}
+
+.input__border--error {
+    border: 1px solid #FE575A;
+    box-shadow: 0 0 8px #FE575A;
 }
