@@ -21,9 +21,14 @@ const button = document.querySelector("#button");
 
 // PREVENTING THE DEFAULT BEHAVIOR OF THE BUTTON
 
-button.addEventListener("click", function(event) {
+form.addEventListener("submit", function(event) {
     event.preventDefault();
 })
+
+// REG EXP RULES FOR THE MAIL & PASSWORD CHECKING
+
+const emailCheck = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const passwordCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
 // CREATING THE ERROR MESSAGES THAT WILL SHOW UP WHEN A MISTAKE IS MADE
 
@@ -44,16 +49,16 @@ const ageNone = "* Veuillez saisir votre âge";
 let message
 
 const errorMessage = (errorType, place, input) => {
+    input.classList.add("input__border--error");
     message = document.createElement("p");
-    message.classList.add("input--error");
+    message.classList.toggle("input--error");
     message.textContent = errorType;
     place.append(message);
-    input.classList.add("input__border--error");
 }
 
 // THE DIFFERENT SCENARI
 
-button.addEventListener("click", function() {
+form.addEventListener("submit", function() {
     if (surName.value.length < 3 && surName.value.length > 0) {
         errorMessage(nameError, nameContainer, surName);
     } else if (surName.value.length <= 0) {
@@ -64,12 +69,12 @@ button.addEventListener("click", function() {
     } else if (firstName.value.length <= 0) {
         errorMessage(firstNameNone, firstNameContainer, firstName);
     }
-    if (email.value.length > 10) {
+    if (!emailCheck.test(email.value)) {
         errorMessage(emailError, emailContainer, email);
     } else if (email.value.length <= 0) {
         errorMessage(emailNone, emailContainer, email);
     }
-    if (password.value.length > 10) {
+    if (!passwordCheck.test(password.value)) {
         errorMessage(passwordError, passwordContainer, password);
     } else if (password.value.length <= 0) {
         errorMessage(passwordNone, passwordContainer, password);
