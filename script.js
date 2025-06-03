@@ -62,47 +62,70 @@ const validInput = (place, input) => {
     message.classList.add("hide");
 }
 
+// MAKES THE FORM = TRUE
+
+let isValid = true;
+
 // THE DIFFERENT SCENARI
 
 form.addEventListener("submit", function() {
     if (surName.value.length < 3 && surName.value.length > 0) {
         errorMessage(nameError, nameContainer, surName);
+        isValid = false;
     } else if (surName.value.length <= 0) {
         errorMessage(nameNone, nameContainer, surName);
+        isValid = false;
     } else {
         validInput(nameContainer, surName);
+        isValid = true;
     }
 
     if (firstName.value.length < 2 && firstName.value.length > 0) {
         errorMessage(firstNameError, firstNameContainer, firstName);
+        isValid = false;
     } else if (firstName.value.length <= 0) {
         errorMessage(firstNameNone, firstNameContainer, firstName);
+        isValid = false;
     } else {
         validInput(firstNameContainer, firstName);
+        isValid = true;
     }
 
     if (!emailCheck.test(email.value)) {
         errorMessage(emailError, emailContainer, email);
+        isValid = false;
     } else if (email.value.length <= 0) {
         errorMessage(emailNone, emailContainer, email);
+        isValid = false;
     } else {
         validInput(emailContainer, email);
+        isValid = true;
     }
 
     if (!passwordCheck.test(password.value)) {
         errorMessage(passwordError, passwordContainer, password);
+        isValid = false;
     } else if (password.value.length <= 0) {
         errorMessage(passwordNone, passwordContainer, password);
+        isValid = false;
     } else {
         validInput(passwordContainer, password);
+        isValid = true;
     }
 
     if (isNaN(age.value) === true || age.value < 18 && age.value.length > 0 || age.value > 99) {
         errorMessage(ageError, ageContainer, age);
+        isValid = false;
     } else if (age.value.length <= 0) {
         errorMessage(ageNone, ageContainer, age);
+        isValid = false;
     } else {
         validInput(ageContainer, age);
+        isValid = true;
+    }
+
+    if (isValid === true) {
+        alert("Vous êtes désormais inscrit, vous allez recevoir un mail !");
     }
 })
 
